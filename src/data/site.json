@@ -1,0 +1,33 @@
+{
+  "orgName": "Sivulingqondo Community Project & ECD",
+  "tagline": "Building Foundations for Children. Strengthening Our Community.",
+  "phone": "+27 73 778 2770",
+  "whatsapp": "27737782770",
+  "email": "sivulingqondocommunityproject@gmail.com",
+  "address": "2A Starlight Walk, Ikhwezi Park, Khayelitsha, Cape Town",
+  "facebook": "https://web.facebook.com/sivulingqondo.comp/",
+  "forGood": "https://www.forgood.co.za/za/en/causes/sivulingqondo-community-project-scp-",
+  "newsletterAction": "",
+  "npoNumber": "",
+  "pboNumber": "",
+  "campaign": {
+    "title": "Tables, Chairs & Safety Mat",
+    "goal": 16500,
+    "raised": 0,
+    "lineItems": [
+      { "label": "5 Child-Size Tables", "amount": 6000 },
+      { "label": "15 Child-Size Chairs", "amount": 5250 },
+      { "label": "3×9m Classroom Mat", "amount": 4500 },
+      { "label": "Delivery & Setup", "amount": 750 }
+    ],
+    "tiers": [
+      { "label": "child's chair", "unit": 350 },
+      { "label": "child's table", "unit": 1200 }
+    ]
+  },
+  "stats": [
+    { "label": "Children in ECD", "value": 15 },
+    { "label": "Programmes", "value": 8 },
+    { "label": "Years serving Khayelitsha", "value": 5 }
+  ]
+}
