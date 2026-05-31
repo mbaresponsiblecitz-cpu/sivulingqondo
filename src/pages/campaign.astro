@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DonationThermometer from '../components/DonationThermometer.astro';
+import ImpactTiers from '../components/ImpactTiers.astro';
+import { formatRand } from '../lib/campaign';
+import site from '../data/site.json';
+const c = site.campaign;
+const proof = (await getCollection('transparency'));
+---
+<BaseLayout title={`${c.title} — ${site.orgName}`} description="Help 15 children learn with dignity. Goal: R16,500.">
+  <section class="section"><div class="container">
+    <h1>{c.title}</h1>
+    <p class="lede">15 children aged 2–5 learn and eat on a bare floor every day. They need tables, chairs, and a 3×9m safety mat to meet ECD standards and give them dignity.</p>
+    <DonationThermometer raised={c.raised} goal={c.goal} />
+    <p><a class="btn btn-primary" href={site.forGood} target="_blank" rel="noopener">Donate via ForGood</a></p>
+
+    <h2>What your donation funds</h2>
+    <ImpactTiers tiers={c.tiers} />
+
+    <h2>Budget breakdown</h2>
+    <table class="budget">
+      <tbody>
+        {c.lineItems.map((li) => (
+          <tr><td>{li.label}</td><td class="amt">{formatRand(li.amount)}</td></tr>
+        ))}
+        <tr class="total"><td>Total Goal</td><td class="amt">{formatRand(c.goal)}</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Full transparency</h2>
+    <p>100% of funds go directly to furniture and safety equipment. We post photos and invoices of every purchase below.</p>
+    {proof.length > 0 ? (
+      <div class="grid grid-3">
+        {proof.map((p) => (
+          <figure class="card" style="margin:0">
+            <img src={p.data.image} alt={p.data.title} loading="lazy" width="600" height="400" style="aspect-ratio:3/2;object-fit:cover" />
+            <figcaption style="padding:var(--space-2)">{p.data.title}
+              {p.data.invoice && <> · <a href={p.data.invoice} target="_blank" rel="noopener">View invoice</a></>}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    ) : (
+      <p>Photos and invoices will be posted here as soon as we begin purchasing.</p>
+    )}
+  </div></section>
+</BaseLayout>
+<style>
+  .lede { font-size: 1.15rem; max-width: 55ch; }
+  .budget { width: 100%; max-width: 520px; border-collapse: collapse; }
+  .budget td { padding: .6rem 0; border-bottom: 1px solid #e3d7c6; }
+  .budget .amt { text-align: right; font-variant-numeric: tabular-nums; }
+  .budget .total td { font-weight: 800; border-bottom: 0; color: var(--c-terracotta); }
+</style>
