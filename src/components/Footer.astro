@@ -1,0 +1,22 @@
+---
+import site from '../data/site.json';
+const reg = [site.npoNumber && `NPO ${site.npoNumber}`, site.pboNumber && `PBO ${site.pboNumber}`]
+  .filter(Boolean).join(' · ');
+---
+<footer class="site-footer">
+  <div class="container">
+    <p><strong>{site.orgName}</strong></p>
+    <p>{site.address}</p>
+    <p>
+      <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a> ·
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+    {reg && <p class="reg">{reg}</p>}
+    <p class="fine">All donations go directly to community programmes.</p>
+  </div>
+</footer>
+<style>
+  .site-footer { background: var(--c-indigo); color: #fff; padding-block: var(--space-6); margin-top: var(--space-8); }
+  .site-footer a { color: var(--c-ochre); }
+  .fine, .reg { color: #d9ddea; font-size: .9rem; }
+</style>
