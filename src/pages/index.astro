@@ -1,15 +1,60 @@
 ---
----
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DonationThermometer from '../components/DonationThermometer.astro';
+import FocusAreaCard from '../components/FocusAreaCard.astro';
+import StatCounter from '../components/StatCounter.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import site from '../data/site.json';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+const focus = (await getCollection('focusAreas')).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
+const c = site.campaign;
+---
+<BaseLayout title={`${site.orgName}`} description={site.tagline}>
+  <section class="hero section">
+    <div class="container">
+      <h1>{site.tagline}</h1>
+      <p class="lede">We provide Early Childhood Development, afterschool care, youth empowerment, and cultural programmes for families in Khayelitsha.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/campaign">Support Our Tables & Chairs Campaign</a>
+        <a class="btn btn-secondary" href="/about">About Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section campaign-banner">
+    <div class="container">
+      <h2>{c.title}</h2>
+      <DonationThermometer raised={c.raised} goal={c.goal} />
+      <a class="btn btn-primary" href="/campaign">See the campaign</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3 stats">
+        {site.stats.map((s) => <StatCounter value={s.value} label={s.label} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What we do</h2>
+      <div class="grid grid-3">
+        {focus.map((f) => <FocusAreaCard title={f.data.title} summary={f.data.summary} image={f.data.image} />)}
+      </div>
+      <p><a class="btn btn-secondary" href="/what-we-do">See all programmes</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container"><NewsletterSignup /></div>
+  </section>
+</BaseLayout>
+<style>
+  .hero { background: linear-gradient(135deg, var(--c-teal), var(--c-indigo)); color: #fff; }
+  .hero .lede { font-size: 1.2rem; max-width: 40ch; }
+  .cta-row { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-3); }
+  .campaign-banner { background: #fff; }
+</style>
