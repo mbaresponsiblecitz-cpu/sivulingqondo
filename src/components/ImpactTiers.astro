@@ -1,0 +1,17 @@
+---
+import { formatRand } from '../lib/campaign';
+interface Props { tiers: { label: string; unit: number }[]; }
+const { tiers } = Astro.props;
+---
+<div class="grid grid-3">
+  {tiers.map((t) => (
+    <div class="card tier">
+      <p class="amt">{formatRand(t.unit)}</p>
+      <p>funds <strong>1 {t.label}</strong></p>
+    </div>
+  ))}
+</div>
+<style>
+  .tier { padding: var(--space-3); text-align: center; }
+  .amt { font-size: 1.6rem; font-weight: 800; color: var(--c-terracotta); margin: 0; }
+</style>

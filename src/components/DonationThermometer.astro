@@ -1,0 +1,15 @@
+---
+import { progressPercent, formatRand } from '../lib/campaign';
+interface Props { raised: number; goal: number; }
+const { raised, goal } = Astro.props;
+const pct = progressPercent(raised, goal);
+---
+<div class="thermo" role="img" aria-label={`${formatRand(raised)} raised of ${formatRand(goal)} goal`}>
+  <div class="track"><div class="fill" style={`width:${pct}%`}></div></div>
+  <p class="labels"><strong>{formatRand(raised)}</strong> raised of {formatRand(goal)} ({pct}%)</p>
+</div>
+<style>
+  .track { background: #eaded0; border-radius: 999px; height: 22px; overflow: hidden; }
+  .fill { background: linear-gradient(90deg, var(--c-ochre), var(--c-terracotta)); height: 100%; }
+  .labels { margin: var(--space-1) 0 0; }
+</style>

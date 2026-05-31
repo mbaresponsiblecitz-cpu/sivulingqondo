@@ -1,0 +1,19 @@
+---
+import site from '../data/site.json';
+const action = site.newsletterAction;
+---
+{action ? (
+  <form class="news" action={action} method="post" target="_blank">
+    <label for="news-email">Get our updates</label>
+    <div class="row">
+      <input id="news-email" type="email" name="EMAIL" placeholder="you@email.com" required />
+      <button class="btn btn-primary" type="submit">Subscribe</button>
+    </div>
+  </form>
+) : (
+  <p class="news-todo">Newsletter signup will appear here once a mailing-list link is added in the CMS.</p>
+)}
+<style>
+  .row { display: flex; gap: var(--space-1); flex-wrap: wrap; }
+  .news input { padding: .7rem; border: 1px solid #d8c9b6; border-radius: var(--radius); flex: 1 1 220px; }
+</style>

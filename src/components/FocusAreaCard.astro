@@ -1,0 +1,16 @@
+---
+interface Props { title: string; summary: string; image: string; }
+const { title, summary, image } = Astro.props;
+---
+<article class="card fa">
+  <img src={image} alt={title} loading="lazy" width="600" height="400" />
+  <div class="body">
+    <h3>{title}</h3>
+    <p>{summary}</p>
+  </div>
+</article>
+<style>
+  .fa img { aspect-ratio: 3/2; object-fit: cover; width: 100%; }
+  .body { padding: var(--space-3); }
+  .fa h3 { color: var(--c-teal); }
+</style>

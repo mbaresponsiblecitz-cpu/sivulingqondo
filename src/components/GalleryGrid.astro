@@ -1,0 +1,18 @@
+---
+interface Item { image: string; caption?: string; }
+interface Props { items: Item[]; }
+const { items } = Astro.props;
+---
+<div class="grid grid-3">
+  {items.map((it) => (
+    <figure class="card g">
+      <img src={it.image} alt={it.caption ?? ''} loading="lazy" width="600" height="600" />
+      {it.caption && <figcaption>{it.caption}</figcaption>}
+    </figure>
+  ))}
+</div>
+<style>
+  .g img { aspect-ratio: 1/1; object-fit: cover; width: 100%; }
+  figcaption { padding: var(--space-2); font-size: .9rem; color: var(--c-muted); }
+  figure { margin: 0; }
+</style>

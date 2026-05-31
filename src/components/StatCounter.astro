@@ -1,0 +1,36 @@
+---
+interface Props { value: number; label: string; }
+const { value, label } = Astro.props;
+---
+<div class="stat" data-value={value}>
+  <span class="num">0</span>
+  <span class="lbl">{label}</span>
+</div>
+<style>
+  .stat { text-align: center; }
+  .num { display: block; font-size: 2.6rem; font-weight: 800; color: var(--c-indigo); }
+  .lbl { color: var(--c-muted); }
+</style>
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('.stat').forEach((el) => {
+    const target = Number(el.dataset.value || 0);
+    const num = el.querySelector('.num')!;
+    if (reduce) { num.textContent = String(target); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        let cur = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const tick = () => {
+          cur = Math.min(target, cur + step);
+          num.textContent = String(cur);
+          if (cur < target) requestAnimationFrame(tick);
+        };
+        tick();
+      });
+    }, { threshold: 0.4 });
+    io.observe(el);
+  });
+</script>
