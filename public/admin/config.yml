@@ -1,0 +1,94 @@
+backend:
+  name: github
+  repo: OWNER/REPO
+  branch: main
+media_folder: "public/images"
+public_folder: "/images"
+collections:
+  - name: site
+    label: Site & Campaign Settings
+    files:
+      - name: site
+        label: Global Settings
+        file: src/data/site.json
+        fields:
+          - { name: orgName, label: Organisation name, widget: string }
+          - { name: tagline, label: Tagline, widget: string }
+          - { name: phone, label: Phone, widget: string }
+          - { name: whatsapp, label: WhatsApp number (digits only, e.g. 27737782770), widget: string }
+          - { name: email, label: Email, widget: string }
+          - { name: address, label: Address, widget: string }
+          - { name: facebook, label: Facebook URL, widget: string }
+          - { name: forGood, label: ForGood donation URL, widget: string }
+          - { name: newsletterAction, label: Newsletter form action URL, widget: string, required: false }
+          - { name: npoNumber, label: NPO number, widget: string, required: false }
+          - { name: pboNumber, label: PBO number, widget: string, required: false }
+          - name: campaign
+            label: Campaign
+            widget: object
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: goal, label: Goal (Rand), widget: number, value_type: int }
+              - { name: raised, label: Amount raised so far (Rand), widget: number, value_type: int }
+              - name: lineItems
+                label: Budget line items
+                widget: list
+                fields:
+                  - { name: label, label: Label, widget: string }
+                  - { name: amount, label: Amount (Rand), widget: number, value_type: int }
+              - name: tiers
+                label: Impact tiers
+                widget: list
+                fields:
+                  - { name: label, label: "Item (e.g. child's chair)", widget: string }
+                  - { name: unit, label: Cost per item (Rand), widget: number, value_type: int }
+          - name: stats
+            label: Impact stats
+            widget: list
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: value, label: Value, widget: number, value_type: int }
+  - name: focusAreas
+    label: Focus Areas / Programmes
+    folder: src/data/focus-areas
+    create: true
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: summary, label: Summary, widget: text }
+      - { name: image, label: Image, widget: image }
+      - { name: order, label: Order, widget: number, value_type: int, default: 0 }
+  - name: team
+    label: Team Members
+    folder: src/data/team
+    create: true
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: role, label: Role, widget: string }
+      - { name: image, label: Photo, widget: image, required: false }
+      - { name: order, label: Order, widget: number, value_type: int, default: 0 }
+  - name: gallery
+    label: Gallery Photos
+    folder: src/data/gallery
+    create: true
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { name: image, label: Photo, widget: image }
+      - { name: caption, label: Caption, widget: string, required: false }
+      - { name: programme, label: Programme, widget: string, required: false }
+      - { name: order, label: Order, widget: number, value_type: int, default: 0 }
+  - name: transparency
+    label: Transparency Wall (purchases)
+    folder: src/data/transparency
+    create: true
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: What was bought, widget: string }
+      - { name: image, label: Photo, widget: image }
+      - { name: invoice, label: Invoice link, widget: string, required: false }
+      - { name: date, label: Date, widget: date, required: false }
