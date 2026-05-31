@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FocusAreaCard from '../components/FocusAreaCard.astro';
+import site from '../data/site.json';
+const focus = (await getCollection('focusAreas')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title={`What We Do — ${site.orgName}`} description="Our programmes and focus areas.">
+  <section class="section"><div class="container">
+    <h1>What We Do</h1>
+    <div class="grid grid-3">
+      {focus.map((f) => <FocusAreaCard title={f.data.title} summary={f.data.summary} image={f.data.image} />)}
+    </div>
+  </div></section>
+</BaseLayout>

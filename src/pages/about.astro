@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+const team = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title={`About — ${site.orgName}`} description="Our story, mission, and team.">
+  <section class="section"><div class="container">
+    <h1>About Us</h1>
+    <h2>Our Story</h2>
+    <p>Sivulingqondo Community Project and ECD was founded to create safe spaces where children can learn, youth can grow, and culture can thrive. We believe every child deserves dignity, every young person deserves opportunity, and every community deserves to keep its heritage alive.</p>
+    <h2>Mission</h2>
+    <p>To build strong foundations for children, create opportunities for youth, and strengthen our community through dignity, skills, care, and the preservation of Xhosa culture and heritage.</p>
+    <h2>Our Team</h2>
+    <div class="grid grid-3">
+      {team.map((m) => (
+        <div class="card" style="padding:var(--space-3)">
+          <h3 style="margin-bottom:.2rem">{m.data.name}</h3>
+          <p style="color:var(--c-muted)">{m.data.role}</p>
+        </div>
+      ))}
+    </div>
+    <h2>Transparency</h2>
+    <p>We are committed to full transparency. 100% of campaign funds go directly to furniture and safety equipment, and we post photos and invoices of every purchase. {site.npoNumber || site.pboNumber ? 'We are a registered NPO/PBO.' : ''}</p>
+  </div></section>
+</BaseLayout>

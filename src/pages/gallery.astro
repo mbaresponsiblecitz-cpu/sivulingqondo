@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+import site from '../data/site.json';
+const photos = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order)
+  .map((p) => ({ image: p.data.image, caption: p.data.caption }));
+---
+<BaseLayout title={`Gallery — ${site.orgName}`} description="Photos from our programmes.">
+  <section class="section"><div class="container">
+    <h1>Gallery</h1>
+    <GalleryGrid items={photos} />
+  </div></section>
+</BaseLayout>
