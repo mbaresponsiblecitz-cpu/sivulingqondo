@@ -110,3 +110,26 @@ Plain typing is completely fine — formatting is optional.
 - If a field looks broken, clear it and re-type, then Publish. Empty fields fall back
   to the original wording, so you can't permanently break a page.
 - For anything you can't fix from the editor, contact the site administrator.
+
+---
+
+## 7. Administrator & account access (for the site administrator)
+
+> **Login credentials (email + password) are NOT stored here.** This repository is
+> public, so secrets must never be committed to it. The account email and password
+> are kept securely in a password manager / private document — **ask the site
+> administrator** for access.
+
+How the accounts fit together:
+
+- **GitHub account (project owner):** `mbaresponsiblecitz-cpu` — owns this repository.
+- The **GitHub account is signed in via a Google account.**
+- The **Netlify account is linked to the GitHub account** (hosting + auto-deploy).
+- The **CMS** at `/admin` logs in through GitHub (GitHub OAuth).
+
+Security reminders for the administrator:
+- Keep the email/password in a **password manager** (e.g. Bitwarden, 1Password) or a
+  **private** document shared only with people who need it.
+- **Never** paste passwords into this repository, the website, issues, or commits.
+- Turn on **2-factor authentication** on the Google and GitHub accounts.
+- Rotate the password if it has ever been shared in plain text.
