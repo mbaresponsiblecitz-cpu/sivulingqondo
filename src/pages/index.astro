@@ -127,13 +127,13 @@ const iv = home.involve;
 
   <!-- STORY / FOUNDER -->
   <section class="section story" id="story">
-    <div class="wrap story-grid">
-      <div class="story-media reveal">
-        {founder?.data.image
-          ? <img class="story-photo" src={founder.data.image} alt={founder.data.name} loading="lazy" />
-          : <div class="story-photo" aria-hidden="true"></div>}
-        <div class="story-badge"><b>{st.badgeTitle || 'Founded 2021'}</b><span>{st.badgeSubtitle || 'by & for the Khayelitsha community'}</span></div>
-      </div>
+    <div class={founder?.data.image ? 'wrap story-grid' : 'wrap story-grid story-grid--single'}>
+      {founder?.data.image && (
+        <div class="story-media reveal">
+          <img class="story-photo" src={founder.data.image} alt={founder.data.name} loading="lazy" />
+          <div class="story-badge"><b>{st.badgeTitle || 'Founded in 2021'}</b><span>{st.badgeSubtitle || 'for the Khayelitsha community'}</span></div>
+        </div>
+      )}
       <div class="reveal">
         <span class="eyebrow on-dark">{st.eyebrow || 'Our story'}</span>
         <h2>{st.heading || 'Opening minds, one child at a time'}</h2>
@@ -145,6 +145,9 @@ const iv = home.involve;
             : <span class="byline-avatar" aria-hidden="true"></span>}
           <span class="who"><b>{founder?.data.name ?? 'Nomvuyo Mzilikazi'}</b><span>{founder?.data.role ?? 'Founder, CEO & Principal Tutor'}</span></span>
         </div>
+        {!founder?.data.image && (
+          <span class="story-badge-inline"><b>{st.badgeTitle || 'Founded in 2021'}</b><span>{st.badgeSubtitle || 'for the Khayelitsha community'}</span></span>
+        )}
       </div>
     </div>
   </section>

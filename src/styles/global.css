@@ -248,6 +248,10 @@ p { text-wrap: pretty; }
    ============================================================ */
 .story { background: var(--teal-deep); color: var(--cream); overflow: hidden; }
 .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+.story-grid--single { grid-template-columns: 1fr; max-width: 760px; }
+.story-badge-inline { display: inline-flex; align-items: baseline; gap: .5rem; margin-top: 1.5rem; background: var(--ochre); color: var(--ink); border-radius: var(--r); padding: .7rem 1.1rem; box-shadow: var(--shadow); }
+.story-badge-inline b { font-family: var(--font-display); font-weight: 800; }
+.story-badge-inline span { font-size: .9rem; }
 .story-media { position: relative; }
 .story-media .story-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--r-lg) 80px var(--r-lg) var(--r-lg); background: var(--teal); box-shadow: var(--shadow); display: block; }
 .story-badge {
