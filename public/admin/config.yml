@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: OWNER/REPO
+  repo: mbaresponsiblecitz-cpu/sivulingqondo
   branch: main
 media_folder: "public/images"
 public_folder: "/images"
