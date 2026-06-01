@@ -47,6 +47,15 @@ collections:
                   - { name: label, label: "Item (e.g. child's chair)", widget: string }
                   - { name: unit, label: Cost per item (Rand), widget: number, value_type: int }
                   - { name: emoji, label: "Icon emoji (e.g. 🪑)", widget: string, required: false }
+          - name: bankDetails
+            label: Bank details (for EFT donations)
+            widget: object
+            fields:
+              - { name: bankName, label: Bank name, widget: string, required: false }
+              - { name: accountHolder, label: Account holder, widget: string, required: false }
+              - { name: accountNumber, label: Account number, widget: string, required: false }
+              - { name: accountType, label: Account type, widget: string, required: false }
+              - { name: reference, label: Payment reference to use, widget: string, required: false }
           - name: stats
             label: Impact stats
             widget: list

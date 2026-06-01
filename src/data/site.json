@@ -36,6 +36,13 @@
       { "label": "child's table", "unit": 1200, "emoji": "🛍️" }
     ]
   },
+  "bankDetails": {
+    "bankName": "First National Bank",
+    "accountHolder": "Sivulingqondo Community Project",
+    "accountNumber": "62888585539",
+    "accountType": "Business Cheque Account",
+    "reference": "Your name + \"donation\""
+  },
   "stats": [
     { "label": "Children in ECD", "value": 15 },
     { "label": "Programmes", "value": 7 },

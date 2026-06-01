@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DonationThermometer from '../components/DonationThermometer.astro';
 import ImpactTiers from '../components/ImpactTiers.astro';
+import BankDetails from '../components/BankDetails.astro';
 import { formatRand } from '../lib/campaign';
 import { md } from '../lib/markdown';
 import site from '../data/site.json';
@@ -16,6 +17,8 @@ const proof = (await getCollection('transparency'));
     <div class="lede prose" set:html={md(page.intro)}></div>
     <DonationThermometer raised={c.raised} goal={c.goal} />
     <p><a class="btn btn-primary" href={site.forGood} target="_blank" rel="noopener">{page.donateLabel || 'Donate via ForGood'}</a></p>
+
+    <BankDetails />
 
     <h2>{page.fundsHeading || 'What your donation funds'}</h2>
     <ImpactTiers tiers={c.tiers} />

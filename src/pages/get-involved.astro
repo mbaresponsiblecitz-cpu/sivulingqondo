@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BankDetails from '../components/BankDetails.astro';
 import site from '../data/site.json';
 import page from '../data/pages/get-involved.json';
 
@@ -28,6 +29,9 @@ const cards = page.cards && page.cards.length ? page.cards : [];
           </div>
         );
       })}
+    </div>
+    <div style="margin-top:var(--space-4)">
+      <BankDetails />
     </div>
   </div></section>
 </BaseLayout>

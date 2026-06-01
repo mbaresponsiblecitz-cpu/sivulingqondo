@@ -1,5 +1,5 @@
 ---
 name: Nomvuyo Mzilikazi
-role: Founder, CEO & Principal Tutor
+role: Founder, Chairperson & Project Manager (volunteering)
 order: 1
 ---

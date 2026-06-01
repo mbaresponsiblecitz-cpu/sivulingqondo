@@ -1,0 +1,33 @@
+---
+import site from '../data/site.json';
+const b = (site as any).bankDetails;
+const hasBank = b && b.accountNumber;
+---
+{hasBank && (
+  <div class="bank-card">
+    <h3>Donate by EFT / direct deposit</h3>
+    <dl class="bank-rows">
+      {b.bankName && <div><dt>Bank</dt><dd>{b.bankName}</dd></div>}
+      {b.accountHolder && <div><dt>Account holder</dt><dd>{b.accountHolder}</dd></div>}
+      {b.accountNumber && <div><dt>Account number</dt><dd>{b.accountNumber}</dd></div>}
+      {b.accountType && <div><dt>Account type</dt><dd>{b.accountType}</dd></div>}
+      {b.reference && <div><dt>Reference</dt><dd>{b.reference}</dd></div>}
+    </dl>
+  </div>
+)}
+<style>
+  .bank-card {
+    background: #fff;
+    border: 1px solid #e3d7c6;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: var(--space-3);
+    max-width: 520px;
+  }
+  .bank-card h3 { margin: 0 0 var(--space-2); color: var(--teal); }
+  .bank-rows { margin: 0; display: grid; gap: .5rem; }
+  .bank-rows > div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid #f0e8db; padding-bottom: .4rem; }
+  .bank-rows > div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .bank-rows dt { color: var(--ink-soft); margin: 0; }
+  .bank-rows dd { margin: 0; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+</style>
