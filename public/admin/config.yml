@@ -93,5 +93,5 @@ collections:
       - { name: image, label: Photo, widget: image }
       - { name: chip, label: "Tag chip (e.g. Weekly)", widget: string, required: false }
       - { name: invoice, label: Invoice link, widget: string, required: false }
-      - { name: date, label: Date, widget: date, required: false }
+      - { name: date, label: Date, widget: datetime, type: date, required: false }
       - { name: order, label: Order, widget: number, value_type: int, default: 0 }
