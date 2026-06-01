@@ -4,12 +4,27 @@ interface Props { raised: number; goal: number; }
 const { raised, goal } = Astro.props;
 const pct = progressPercent(raised, goal);
 ---
-<div class="thermo" role="img" aria-label={`${formatRand(raised)} raised of ${formatRand(goal)} goal`}>
-  <div class="track"><div class="fill" style={`width:${pct}%`}></div></div>
-  <p class="labels"><strong>{formatRand(raised)}</strong> raised of {formatRand(goal)} ({pct}%)</p>
+<div class="thermo">
+  <div class="thermo-track">
+    <div class="thermo-fill" data-fill={pct} style="width:0%" role="img" aria-label={`${formatRand(raised)} raised of ${formatRand(goal)} goal (${pct}%)`}></div>
+  </div>
+  <div class="thermo-meta">
+    <span class="raised">{formatRand(raised)} raised</span>
+    <span class="goal">of {formatRand(goal)} goal</span>
+  </div>
 </div>
-<style>
-  .track { background: #eaded0; border-radius: 999px; height: 22px; overflow: hidden; }
-  .fill { background: linear-gradient(90deg, var(--c-ochre), var(--c-terracotta)); height: 100%; }
-  .labels { margin: var(--space-1) 0 0; }
-</style>
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('.thermo-fill').forEach((el) => {
+    const target = (el.dataset.fill || '0') + '%';
+    if (reduce) { el.style.width = target; return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        requestAnimationFrame(() => { el.style.width = target; });
+      });
+    }, { threshold: 0.4 });
+    io.observe(el);
+  });
+</script>

@@ -1,16 +1,15 @@
 ---
-interface Props { title: string; summary: string; image: string; }
-const { title, summary, image } = Astro.props;
+interface Props { title: string; summary: string; image: string; icon?: string; href?: string; }
+const { title, summary, image, icon, href = '/what-we-do' } = Astro.props;
+const hasImage = image && image !== '/images/placeholder.jpg';
 ---
-<article class="card fa">
-  <img src={image} alt={title} loading="lazy" width="600" height="400" />
-  <div class="body">
+<article class="prog-card reveal">
+  {hasImage && <img class="prog-img" src={image} alt={title} loading="lazy" width="600" height="400" />}
+  {!hasImage && <div class="prog-img" aria-hidden="true"></div>}
+  <div class="prog-body">
+    {icon && <span class="prog-icon">{icon}</span>}
     <h3>{title}</h3>
     <p>{summary}</p>
+    <a class="prog-more" href={href}>Learn more <span class="arr">→</span></a>
   </div>
 </article>
-<style>
-  .fa img { aspect-ratio: 3/2; object-fit: cover; width: 100%; }
-  .body { padding: var(--space-3); }
-  .fa h3 { color: var(--c-teal); }
-</style>

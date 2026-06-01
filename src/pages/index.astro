@@ -5,56 +5,183 @@ import DonationThermometer from '../components/DonationThermometer.astro';
 import FocusAreaCard from '../components/FocusAreaCard.astro';
 import StatCounter from '../components/StatCounter.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
+import { formatRand } from '../lib/campaign';
 import site from '../data/site.json';
 
-const focus = (await getCollection('focusAreas')).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
+const focus = (await getCollection('focusAreas')).sort((a, b) => a.data.order - b.data.order);
+const team = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+const founder = team[0];
+const proof = (await getCollection('transparency')).sort((a, b) => a.data.order - b.data.order);
 const c = site.campaign;
+const tierEmoji = ['🪑', '🛍️', '🎒', '✏️'];
+const partners = ['Shoprite ACT!', 'Royco', 'Blue Ribbon', 'ForGood'];
+const marquee = ['Early Childhood Development', 'Afterschool Care', 'Youth Empowerment', 'Sports, Arts & Heritage', 'Food Security', 'Community Support'];
 ---
-<BaseLayout title={`${site.orgName}`} description={site.tagline}>
-  <section class="hero section">
-    <div class="container">
-      <h1>{site.tagline}</h1>
-      <p class="lede">We provide Early Childhood Development, afterschool care, youth empowerment, and cultural programmes for families in Khayelitsha.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="/campaign">Support Our Tables & Chairs Campaign</a>
-        <a class="btn btn-secondary" href="/about">About Us</a>
+<BaseLayout title={`${site.orgName} — Building foundations for children`} description="Early Childhood Development, afterschool care, youth empowerment and cultural programmes for families in Khayelitsha, Cape Town.">
+
+  <!-- HERO — Collage -->
+  <section class="hero">
+    <div class="hcollage">
+      <span class="blob" style="width:440px;height:440px;background:var(--ochre-soft);top:-120px;left:50%;transform:translateX(-50%);opacity:.6;"></span>
+      <div class="collage-frames" aria-hidden="true">
+        <img class="cf cf1" src="/images/children-garden.jpg" alt="" loading="eager" />
+        <img class="cf cf2" src="/images/portrait-team.jpg" alt="" loading="eager" />
+        <img class="cf cf3" src="/images/serving-soup.jpg" alt="" loading="eager" />
+        <img class="cf cf4" src="/images/elders-served.jpg" alt="" loading="eager" />
+        <span class="confetti" style="width:16px;height:16px;background:var(--teal);top:22%;left:24%;"></span>
+        <span class="confetti" style="width:22px;height:22px;background:var(--accent);top:70%;left:30%;"></span>
+        <span class="confetti" style="width:14px;height:14px;background:var(--ochre);top:30%;right:26%;"></span>
+        <span class="confetti" style="width:20px;height:20px;background:var(--leaf);bottom:18%;right:30%;"></span>
+      </div>
+      <div class="wrap">
+        <span class="eyebrow">Khayelitsha · Cape Town</span>
+        <h1>Where Khayelitsha&rsquo;s children come to learn, play &amp; grow.</h1>
+        <svg class="squiggle" viewBox="0 0 220 18" fill="none" aria-hidden="true"><path d="M3 12C40 4 60 4 90 10s55 9 127-5" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>
+        <p class="lede">A safe place for early learning, afterschool care, youth and culture — built by this community, for this community.</p>
+        <div class="hcollage-cta">
+          <a class="btn btn-primary" href="/campaign">Support our campaign <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="/what-we-do">See our programmes</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section campaign-banner">
-    <div class="container">
-      <h2>{c.title}</h2>
-      <DonationThermometer raised={c.raised} goal={c.goal} />
-      <a class="btn btn-primary" href="/campaign">See the campaign</a>
+  <!-- TRUST MARQUEE -->
+  <div class="trust-strip" aria-hidden="true">
+    <div class="trust-track">
+      {marquee.map((m) => <span>{m}</span>)}
+      {marquee.map((m) => <span>{m}</span>)}
+    </div>
+  </div>
+
+  <!-- CAMPAIGN -->
+  <section class="section campaign" id="campaign">
+    <div class="wrap">
+      <div class="campaign-card reveal">
+        <div class="cc-left">
+          <span class="cc-tag">Current campaign</span>
+          <h2>{c.title}</h2>
+          <p class="lede" style="margin-top:.8rem;">Right now our 15 little ones sit on the floor. Help us furnish a proper learning space — every rand is photographed and accounted for.</p>
+          <DonationThermometer raised={c.raised} goal={c.goal} />
+          <ul class="line-items">
+            {c.lineItems.map((li) => (
+              <li><span>{li.label}</span><span class="amt">{formatRand(li.amount)}</span></li>
+            ))}
+          </ul>
+        </div>
+        <div class="cc-right">
+          <h3>Give a child a place to learn</h3>
+          <div class="give-tiers">
+            {c.tiers.map((t, i) => (
+              <a class="tier" href={site.forGood} target="_blank" rel="noopener">
+                <span><span class="tier-amt">{formatRand(t.unit)}</span><br /><span class="tier-for">buys one {t.label}</span></span>
+                <span class="tier-emoji">{tierEmoji[i] ?? '🎁'}</span>
+              </a>
+            ))}
+          </div>
+          <a class="btn btn-light" href={site.forGood} target="_blank" rel="noopener">Donate via ForGood</a>
+          <p class="cc-note"><span>🔒</span><span>100% of campaign funds go directly to furniture and safety equipment. We post photos and invoices of every purchase.</span></p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="grid grid-3 stats">
+  <!-- STATS RIBBON -->
+  <section class="section stats-ribbon">
+    <div class="wrap">
+      <div class="stats-grid">
         {site.stats.map((s) => <StatCounter value={s.value} label={s.label} />)}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>What we do</h2>
-      <div class="grid grid-3">
-        {focus.map((f) => <FocusAreaCard title={f.data.title} summary={f.data.summary} image={f.data.image} />)}
+  <!-- PROGRAMMES -->
+  <section class="section" id="programmes">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Seven ways we show up for our community</h2>
+        <p>From a child&rsquo;s very first years to a young adult&rsquo;s first job — we meet families where they are.</p>
       </div>
-      <p><a class="btn btn-secondary" href="/what-we-do">See all programmes</a></p>
+      <div class="prog-grid">
+        {focus.map((f) => (
+          <FocusAreaCard title={f.data.title} summary={f.data.summary} image={f.data.image} icon={f.data.icon} href="/what-we-do" />
+        ))}
+        <a class="prog-card prog-card-cta reveal" href="/what-we-do">
+          <div class="prog-body" style="flex:none;align-items:center;justify-content:center;">
+            <h3>See all programmes</h3>
+            <span class="prog-more">Explore what we do <span class="arr">→</span></span>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container"><NewsletterSignup /></div>
+  <!-- STORY / FOUNDER -->
+  <section class="section story" id="story">
+    <div class="wrap story-grid">
+      <div class="story-media reveal">
+        {founder?.data.image
+          ? <img class="story-photo" src={founder.data.image} alt={founder.data.name} loading="lazy" />
+          : <div class="story-photo" aria-hidden="true"></div>}
+        <div class="story-badge"><b>Founded 2021</b><span>by &amp; for the Khayelitsha community</span></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow on-dark">Our story</span>
+        <h2>Opening minds, one child at a time</h2>
+        <p class="lede">&ldquo;Sivulingqondo&rdquo; means <em>we open the mind</em>. We started with a few children and a simple belief — that every child deserves dignity, every young person deserves opportunity, and every community deserves to keep its heritage alive.</p>
+        <blockquote class="quote"><span class="mark">&ldquo;</span>When a child feels safe and seen, they can learn anything. That&rsquo;s the foundation we&rsquo;re building here.<span class="mark">&rdquo;</span></blockquote>
+        <div class="byline">
+          {founder?.data.image
+            ? <img class="byline-avatar" src={founder.data.image} alt={founder.data.name} loading="lazy" />
+            : <span class="byline-avatar" aria-hidden="true"></span>}
+          <span class="who"><b>{founder?.data.name ?? 'Nomvuyo Mzilikazi'}</b><span>{founder?.data.role ?? 'Founder, CEO & Principal Tutor'}</span></span>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <!-- TRANSPARENCY / FUNDERS -->
+  <section class="section transparency" id="transparency">
+    <div class="wrap">
+      <div class="sec-head reveal" style="text-align:center;">
+        <span class="eyebrow" style="justify-content:center;">Transparency</span>
+        <h2>Our work, out in the open</h2>
+        <p style="margin-inline:auto;">We show up every week — and we show the work. Moments from our mobile soup kitchen and programmes in Khayelitsha. Every campaign purchase comes with a photo and an invoice, too.</p>
+      </div>
+      <div class="tw-grid">
+        {proof.map((p) => (
+          <div class="tw-card reveal">
+            <img class="tw-img" src={p.data.image} alt={p.data.title} loading="lazy" />
+            <div class="tw-foot"><b>{p.data.title}</b>{p.data.chip && <span class="tw-chip">{p.data.chip}</span>}</div>
+          </div>
+        ))}
+      </div>
+      <div class="funders reveal">
+        <p class="fl-label">Proudly supported &amp; partnered with</p>
+        <div class="funder-row">
+          {partners.map((p) => <span class="funder-logo">{p}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET INVOLVED -->
+  <section class="section involve" id="involve">
+    <span class="blob" style="width:420px;height:420px;background:rgba(255,255,255,.12);top:-140px;right:-100px;"></span>
+    <div class="wrap involve-grid">
+      <div class="reveal">
+        <span class="eyebrow on-dark" style="color:#fff;">Get involved</span>
+        <h2>There&rsquo;s a place for you here</h2>
+        <p class="lede">Give once, give monthly, volunteer your time, or partner with us. Every bit helps a child in Khayelitsha thrive.</p>
+        <div class="involve-actions">
+          <a class="btn btn-light" href="/campaign">Donate now</a>
+          <a class="btn btn-outline-light" href="/get-involved">Volunteer</a>
+          <a class="btn btn-outline-light" href="/get-involved">Partner with us</a>
+        </div>
+      </div>
+      <NewsletterSignup />
+    </div>
+  </section>
+
 </BaseLayout>
-<style>
-  .hero { background: linear-gradient(135deg, var(--c-teal), var(--c-indigo)); color: #fff; }
-  .hero .lede { font-size: 1.2rem; max-width: 40ch; }
-  .cta-row { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-3); }
-  .campaign-banner { background: #fff; }
-</style>

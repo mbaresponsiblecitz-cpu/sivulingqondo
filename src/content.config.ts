@@ -7,6 +7,7 @@ const focusAreas = defineCollection({
     title: z.string(),
     summary: z.string(),
     image: z.string(),
+    icon: z.string().optional(),
     order: z.number().default(0),
   }),
 });
@@ -36,8 +37,10 @@ const transparency = defineCollection({
   schema: z.object({
     title: z.string(),
     image: z.string(),
+    chip: z.string().optional(),
     invoice: z.string().optional(),
     date: z.coerce.date().optional(),
+    order: z.number().default(0),
   }),
 });
 

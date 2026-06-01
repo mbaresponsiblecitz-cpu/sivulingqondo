@@ -58,6 +58,7 @@ collections:
       - { name: title, label: Title, widget: string }
       - { name: summary, label: Summary, widget: text }
       - { name: image, label: Image, widget: image }
+      - { name: icon, label: "Icon emoji (e.g. 🧸)", widget: string, required: false }
       - { name: order, label: Order, widget: number, value_type: int, default: 0 }
   - name: team
     label: Team Members
@@ -90,5 +91,7 @@ collections:
     fields:
       - { name: title, label: What was bought, widget: string }
       - { name: image, label: Photo, widget: image }
+      - { name: chip, label: "Tag chip (e.g. Weekly)", widget: string, required: false }
       - { name: invoice, label: Invoice link, widget: string, required: false }
       - { name: date, label: Date, widget: date, required: false }
+      - { name: order, label: Order, widget: number, value_type: int, default: 0 }

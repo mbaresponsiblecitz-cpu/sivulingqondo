@@ -15,5 +15,19 @@ const { title, description, image } = Astro.props;
     <main><slot /></main>
     <Footer />
     <WhatsAppButton />
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = document.querySelectorAll('.reveal');
+      if (reduce) {
+        els.forEach((el) => el.classList.add('in'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.15 });
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
   </body>
 </html>

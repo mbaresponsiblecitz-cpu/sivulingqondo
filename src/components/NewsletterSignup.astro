@@ -1,19 +1,19 @@
 ---
 import site from '../data/site.json';
-const action = site.newsletterAction;
+const action = site.newsletterAction || '';
 ---
-{action ? (
-  <form class="news" action={action} method="post" target="_blank">
-    <label for="news-email">Get our updates</label>
-    <div class="row">
-      <input id="news-email" type="email" name="EMAIL" placeholder="you@email.com" required />
-      <button class="btn btn-primary" type="submit">Subscribe</button>
-    </div>
+<div class="news-card reveal">
+  <h3>Stay in the loop</h3>
+  <p>Occasional updates on the children, programmes and campaigns. No spam, ever.</p>
+  <form class="news-form" action={action || undefined} method="post" target={action ? '_blank' : undefined} onsubmit={action ? undefined : 'return false;'}>
+    <label class="visually-hidden" for="news-email">Email address</label>
+    <input id="news-email" type="email" name="EMAIL" placeholder="you@email.com" required />
+    <button class="btn btn-primary" type="submit">Subscribe</button>
   </form>
-) : (
-  <p class="news-todo">Newsletter signup will appear here once a mailing-list link is added in the CMS.</p>
-)}
+</div>
 <style>
-  .row { display: flex; gap: var(--space-1); flex-wrap: wrap; }
-  .news input { padding: .7rem; border: 1px solid #d8c9b6; border-radius: var(--radius); flex: 1 1 220px; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
 </style>

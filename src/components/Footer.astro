@@ -2,21 +2,41 @@
 import site from '../data/site.json';
 const reg = [site.npoNumber && `NPO ${site.npoNumber}`, site.pboNumber && `PBO ${site.pboNumber}`]
   .filter(Boolean).join(' · ');
+const tel = `tel:${site.phone.replace(/\s/g, '')}`;
 ---
 <footer class="site-footer">
-  <div class="container">
-    <p><strong>{site.orgName}</strong></p>
-    <p>{site.address}</p>
-    <p>
-      <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a> ·
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-    </p>
-    {reg && <p class="reg">{reg}</p>}
-    <p class="fine">All donations go directly to community programmes.</p>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <span class="brand-mark">S</span>
+          <span>
+            <span class="brand-name" style="color:var(--cream)">Sivulingqondo</span><br />
+            <span class="brand-sub" style="color:rgba(251,244,234,.6)">Community Project &amp; ECD</span>
+          </span>
+        </a>
+        <p>Building foundations for children. Strengthening our community. Based in Ikhwezi Park, Khayelitsha, Cape Town.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="/about">About us</a>
+        <a href="/what-we-do">What we do</a>
+        <a href="/campaign">Campaign</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/get-involved">Get involved</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href={tel}>{site.phone}</a>
+        <a href={`mailto:${site.email}`}>Email us</a>
+        <a href="/contact">Contact &amp; map</a>
+        <p>{site.address}</p>
+        <a href={site.facebook} target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 {site.orgName}. All donations go directly to community programmes.</span>
+      {reg && <span>Registered {reg}</span>}
+    </div>
   </div>
 </footer>
-<style>
-  .site-footer { background: var(--c-indigo); color: #fff; padding-block: var(--space-6); margin-top: var(--space-8); }
-  .site-footer a { color: var(--c-ochre); }
-  .fine, .reg { color: #d9ddea; font-size: .9rem; }
-</style>
