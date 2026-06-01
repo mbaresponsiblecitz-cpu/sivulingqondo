@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "eyebrow": "Khayelitsha · Cape Town",
+    "headline": "Where Khayelitsha’s children come to learn, play & grow.",
+    "intro": "A safe place for early learning, afterschool care, youth and culture — built by this community, for this community.",
+    "primaryCtaLabel": "Support our campaign",
+    "secondaryCtaLabel": "See our programmes",
+    "photo1": "/images/children-garden.jpg",
+    "photo2": "/images/portrait-team.jpg",
+    "photo3": "/images/serving-soup.jpg",
+    "photo4": "/images/elders-served.jpg"
+  },
+  "campaignCard": {
+    "tag": "Current campaign",
+    "intro": "Right now our 15 little ones sit on the floor. Help us furnish a proper learning space — every rand is photographed and accounted for.",
+    "rightHeading": "Give a child a place to learn",
+    "note": "100% of campaign funds go directly to furniture and safety equipment. We post photos and invoices of every purchase."
+  },
+  "programmes": {
+    "eyebrow": "What we do",
+    "heading": "Seven ways we show up for our community",
+    "subtext": "From a child’s very first years to a young adult’s first job — we meet families where they are."
+  },
+  "story": {
+    "eyebrow": "Our story",
+    "heading": "Opening minds, one child at a time",
+    "body": "“Sivulingqondo” means *we open the mind*. We started with a few children and a simple belief — that every child deserves dignity, every young person deserves opportunity, and every community deserves to keep its heritage alive.",
+    "quote": "When a child feels safe and seen, they can learn anything. That’s the foundation we’re building here.",
+    "badgeTitle": "Founded 2021",
+    "badgeSubtitle": "by & for the Khayelitsha community"
+  },
+  "transparency": {
+    "eyebrow": "Transparency",
+    "heading": "Our work, out in the open",
+    "intro": "We show up every week — and we show the work. Moments from our mobile soup kitchen and programmes in Khayelitsha. Every campaign purchase comes with a photo and an invoice, too.",
+    "partnersLabel": "Proudly supported & partnered with"
+  },
+  "involve": {
+    "eyebrow": "Get involved",
+    "heading": "There’s a place for you here",
+    "intro": "Give once, give monthly, volunteer your time, or partner with us. Every bit helps a child in Khayelitsha thrive.",
+    "donateLabel": "Donate now",
+    "volunteerLabel": "Volunteer",
+    "partnerLabel": "Partner with us"
+  }
+}

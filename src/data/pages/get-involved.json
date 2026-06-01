@@ -1,0 +1,29 @@
+{
+  "heading": "Get Involved",
+  "cards": [
+    {
+      "title": "Donate",
+      "body": "Give securely via ForGood. 100% goes to community programmes.",
+      "buttonLabel": "Donate via ForGood",
+      "buttonUrl": "forGood"
+    },
+    {
+      "title": "Volunteer or Partner",
+      "body": "Share your time or skills, or partner with us as a business.",
+      "buttonLabel": "Get in touch",
+      "buttonUrl": "/contact"
+    },
+    {
+      "title": "Donate Goods",
+      "body": "Furniture, books, toys, and food all help. Contact us to arrange drop-off.",
+      "buttonLabel": "Contact us",
+      "buttonUrl": "/contact"
+    },
+    {
+      "title": "Chat on WhatsApp",
+      "body": "The fastest way to reach us.",
+      "buttonLabel": "Open WhatsApp",
+      "buttonUrl": "whatsapp"
+    }
+  ]
+}

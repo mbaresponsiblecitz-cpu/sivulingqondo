@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
+import page from '../data/pages/contact.json';
 const mapQuery = encodeURIComponent(site.address);
 ---
 <BaseLayout title={`Contact — ${site.orgName}`} description="Get in touch with Sivulingqondo.">
   <section class="section"><div class="container">
-    <h1>Contact Us</h1>
+    <h1>{page.heading || 'Contact Us'}</h1>
+    {page.intro && <p class="lede">{page.intro}</p>}
     <div class="grid grid-2">
       <div>
         <p><strong>{site.orgName}</strong></p>
@@ -22,7 +24,7 @@ const mapQuery = encodeURIComponent(site.address);
         <p><label>Name<br /><input name="name" required /></label></p>
         <p><label>Email<br /><input type="email" name="email" required /></label></p>
         <p><label>Message<br /><textarea name="message" rows="5" required></textarea></label></p>
-        <button class="btn btn-primary" type="submit">Send</button>
+        <button class="btn btn-primary" type="submit">{page.formButtonLabel || 'Send'}</button>
       </form>
     </div>
   </div></section>

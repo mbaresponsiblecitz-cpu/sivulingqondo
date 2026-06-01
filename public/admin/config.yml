@@ -16,6 +16,7 @@ collections:
           - { name: tagline, label: Tagline, widget: string }
           - { name: phone, label: Phone, widget: string }
           - { name: whatsapp, label: WhatsApp number (digits only, e.g. 27737782770), widget: string }
+          - { name: whatsappMessage, label: WhatsApp pre-filled message, widget: string, required: false }
           - { name: email, label: Email, widget: string }
           - { name: address, label: Address, widget: string }
           - { name: facebook, label: Facebook URL, widget: string }
@@ -23,6 +24,9 @@ collections:
           - { name: newsletterAction, label: Newsletter form action URL, widget: string, required: false }
           - { name: npoNumber, label: NPO number, widget: string, required: false }
           - { name: pboNumber, label: PBO number, widget: string, required: false }
+          - { name: footerNote, label: Footer note (small line at bottom of every page), widget: string, required: false }
+          - { name: partners, label: Partners & funders (logos strip), widget: list }
+          - { name: programmeTicker, label: Programme ticker (scrolling strip on home), widget: list }
           - name: campaign
             label: Campaign
             widget: object
@@ -42,12 +46,119 @@ collections:
                 fields:
                   - { name: label, label: "Item (e.g. child's chair)", widget: string }
                   - { name: unit, label: Cost per item (Rand), widget: number, value_type: int }
+                  - { name: emoji, label: "Icon emoji (e.g. 🪑)", widget: string, required: false }
           - name: stats
             label: Impact stats
             widget: list
             fields:
               - { name: label, label: Label, widget: string }
               - { name: value, label: Value, widget: number, value_type: int }
+  - name: pages
+    label: Page Content
+    files:
+      - name: home
+        label: Home Page
+        file: src/data/pages/home.json
+        fields:
+          - name: hero
+            label: Hero (top of page)
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label above heading, widget: string, required: false }
+              - { name: headline, label: Main headline, widget: string }
+              - { name: intro, label: Intro paragraph, widget: text }
+              - { name: primaryCtaLabel, label: Primary button label, widget: string, required: false }
+              - { name: secondaryCtaLabel, label: Secondary button label, widget: string, required: false }
+              - { name: photo1, label: Collage photo 1, widget: image, required: false }
+              - { name: photo2, label: Collage photo 2, widget: image, required: false }
+              - { name: photo3, label: Collage photo 3, widget: image, required: false }
+              - { name: photo4, label: Collage photo 4, widget: image, required: false }
+          - name: campaignCard
+            label: Campaign card
+            widget: object
+            fields:
+              - { name: tag, label: Tag, widget: string, required: false }
+              - { name: intro, label: Intro paragraph, widget: text }
+              - { name: rightHeading, label: Right-side heading, widget: string, required: false }
+              - { name: note, label: Trust note, widget: text, required: false }
+          - name: programmes
+            label: Programmes section
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: subtext, label: Subtext, widget: text, required: false }
+          - name: story
+            label: Story section
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Story text, widget: markdown }
+              - { name: quote, label: Pull quote, widget: text, required: false }
+              - { name: badgeTitle, label: Badge title, widget: string, required: false }
+              - { name: badgeSubtitle, label: Badge subtitle, widget: string, required: false }
+          - name: transparency
+            label: Transparency section
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: intro, label: Intro paragraph, widget: text, required: false }
+              - { name: partnersLabel, label: Partners strip label, widget: string, required: false }
+          - name: involve
+            label: Get-involved band
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small label, widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: intro, label: Intro paragraph, widget: text, required: false }
+              - { name: donateLabel, label: Donate button label, widget: string, required: false }
+              - { name: volunteerLabel, label: Volunteer button label, widget: string, required: false }
+              - { name: partnerLabel, label: Partner button label, widget: string, required: false }
+      - name: about
+        label: About Page
+        file: src/data/pages/about.json
+        fields:
+          - { name: heading, label: Page heading, widget: string }
+          - { name: storyHeading, label: Story heading, widget: string }
+          - { name: storyBody, label: Story text, widget: markdown }
+          - { name: missionHeading, label: Mission heading, widget: string }
+          - { name: missionBody, label: Mission text, widget: markdown }
+          - { name: teamHeading, label: Team heading, widget: string }
+          - { name: transparencyHeading, label: Transparency heading, widget: string }
+          - { name: transparencyBody, label: Transparency text, widget: markdown }
+      - name: campaign
+        label: Campaign Page
+        file: src/data/pages/campaign.json
+        fields:
+          - { name: intro, label: Appeal intro, widget: markdown }
+          - { name: donateLabel, label: Donate button label, widget: string, required: false }
+          - { name: fundsHeading, label: "‘What your donation funds’ heading", widget: string }
+          - { name: budgetHeading, label: Budget heading, widget: string }
+          - { name: transparencyHeading, label: Transparency heading, widget: string }
+          - { name: transparencyIntro, label: Transparency intro, widget: text, required: false }
+          - { name: emptyState, label: Empty-state text (before any purchases), widget: text, required: false }
+      - name: getInvolved
+        label: Get Involved Page
+        file: src/data/pages/get-involved.json
+        fields:
+          - { name: heading, label: Page heading, widget: string }
+          - name: cards
+            label: Cards
+            widget: list
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: body, label: Text, widget: text }
+              - { name: buttonLabel, label: Button label, widget: string }
+              - { name: buttonUrl, label: "Button link (URL, or 'forGood' / 'whatsapp' / /contact)", widget: string }
+      - name: contact
+        label: Contact Page
+        file: src/data/pages/contact.json
+        fields:
+          - { name: heading, label: Page heading, widget: string }
+          - { name: intro, label: Intro (optional), widget: text, required: false }
+          - { name: formButtonLabel, label: Form button label, widget: string, required: false }
   - name: focusAreas
     label: Focus Areas / Programmes
     folder: src/data/focus-areas

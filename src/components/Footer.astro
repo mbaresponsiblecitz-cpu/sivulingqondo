@@ -35,7 +35,7 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 {site.orgName}. All donations go directly to community programmes.</span>
+      <span>© 2026 {site.orgName}. {site.footerNote || 'All donations go directly to community programmes.'}</span>
       {reg && <span>Registered {reg}</span>}
     </div>
   </div>

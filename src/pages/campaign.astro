@@ -4,21 +4,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import DonationThermometer from '../components/DonationThermometer.astro';
 import ImpactTiers from '../components/ImpactTiers.astro';
 import { formatRand } from '../lib/campaign';
+import { md } from '../lib/markdown';
 import site from '../data/site.json';
+import page from '../data/pages/campaign.json';
 const c = site.campaign;
 const proof = (await getCollection('transparency'));
 ---
 <BaseLayout title={`${c.title} — ${site.orgName}`} description="Help 15 children learn with dignity. Goal: R16,500.">
   <section class="section"><div class="container">
     <h1>{c.title}</h1>
-    <p class="lede">15 children aged 2–5 learn and eat on a bare floor every day. They need tables, chairs, and a 3×9m safety mat to meet ECD standards and give them dignity.</p>
+    <div class="lede prose" set:html={md(page.intro)}></div>
     <DonationThermometer raised={c.raised} goal={c.goal} />
-    <p><a class="btn btn-primary" href={site.forGood} target="_blank" rel="noopener">Donate via ForGood</a></p>
+    <p><a class="btn btn-primary" href={site.forGood} target="_blank" rel="noopener">{page.donateLabel || 'Donate via ForGood'}</a></p>
 
-    <h2>What your donation funds</h2>
+    <h2>{page.fundsHeading || 'What your donation funds'}</h2>
     <ImpactTiers tiers={c.tiers} />
 
-    <h2>Budget breakdown</h2>
+    <h2>{page.budgetHeading || 'Budget breakdown'}</h2>
     <table class="budget">
       <tbody>
         {c.lineItems.map((li) => (
@@ -28,8 +30,8 @@ const proof = (await getCollection('transparency'));
       </tbody>
     </table>
 
-    <h2>Full transparency</h2>
-    <p>100% of funds go directly to furniture and safety equipment. We post photos and invoices of every purchase below.</p>
+    <h2>{page.transparencyHeading || 'Full transparency'}</h2>
+    <p>{page.transparencyIntro || '100% of funds go directly to furniture and safety equipment. We post photos and invoices of every purchase below.'}</p>
     {proof.length > 0 ? (
       <div class="grid grid-3">
         {proof.map((p) => (
@@ -42,7 +44,7 @@ const proof = (await getCollection('transparency'));
         ))}
       </div>
     ) : (
-      <p>Photos and invoices will be posted here as soon as we begin purchasing.</p>
+      <p>{page.emptyState || 'Photos and invoices will be posted here as soon as we begin purchasing.'}</p>
     )}
   </div></section>
 </BaseLayout>

@@ -1,31 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
+import page from '../data/pages/get-involved.json';
+
+function resolveUrl(u: string): string {
+  if (u === 'forGood') return site.forGood;
+  if (u === 'whatsapp') return `https://wa.me/${site.whatsapp}`;
+  return u;
+}
+function isExternal(u: string): boolean {
+  return u === 'forGood' || u === 'whatsapp' || /^https?:\/\//.test(u);
+}
+const cards = page.cards && page.cards.length ? page.cards : [];
 ---
 <BaseLayout title={`Get Involved — ${site.orgName}`} description="Donate, volunteer, partner, or donate goods.">
   <section class="section"><div class="container">
-    <h1>Get Involved</h1>
+    <h1>{page.heading || 'Get Involved'}</h1>
     <div class="grid grid-2">
-      <div class="card" style="padding:var(--space-3)">
-        <h3>Donate</h3>
-        <p>Give securely via ForGood. 100% goes to community programmes.</p>
-        <a class="btn btn-primary" href={site.forGood} target="_blank" rel="noopener">Donate via ForGood</a>
-      </div>
-      <div class="card" style="padding:var(--space-3)">
-        <h3>Volunteer or Partner</h3>
-        <p>Share your time or skills, or partner with us as a business.</p>
-        <a class="btn btn-secondary" href="/contact">Get in touch</a>
-      </div>
-      <div class="card" style="padding:var(--space-3)">
-        <h3>Donate Goods</h3>
-        <p>Furniture, books, toys, and food all help. Contact us to arrange drop-off.</p>
-        <a class="btn btn-secondary" href="/contact">Contact us</a>
-      </div>
-      <div class="card" style="padding:var(--space-3)">
-        <h3>Chat on WhatsApp</h3>
-        <p>The fastest way to reach us.</p>
-        <a class="btn btn-primary" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener">Open WhatsApp</a>
-      </div>
+      {cards.map((card, i) => {
+        const url = resolveUrl(card.buttonUrl);
+        const ext = isExternal(card.buttonUrl);
+        return (
+          <div class="card" style="padding:var(--space-3)">
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+            <a class={i % 2 === 0 ? 'btn btn-primary' : 'btn btn-secondary'} href={url} {...(ext ? { target: '_blank', rel: 'noopener' } : {})}>{card.buttonLabel}</a>
+          </div>
+        );
+      })}
     </div>
   </div></section>
 </BaseLayout>

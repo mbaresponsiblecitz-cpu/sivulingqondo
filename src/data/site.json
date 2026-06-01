@@ -3,6 +3,7 @@
   "tagline": "Building Foundations for Children. Strengthening Our Community.",
   "phone": "+27 73 778 2770",
   "whatsapp": "27737782770",
+  "whatsappMessage": "Hi Sivulingqondo, I would like to help.",
   "email": "sivulingqondocommunityproject@gmail.com",
   "address": "2A Starlight Walk, Ikhwezi Park, Khayelitsha, Cape Town",
   "facebook": "https://web.facebook.com/sivulingqondo.comp/",
@@ -10,6 +11,16 @@
   "newsletterAction": "",
   "npoNumber": "247-134",
   "pboNumber": "",
+  "footerNote": "All donations go directly to community programmes.",
+  "partners": ["Shoprite ACT!", "Royco", "Blue Ribbon", "ForGood"],
+  "programmeTicker": [
+    "Early Childhood Development",
+    "Afterschool Care",
+    "Youth Empowerment",
+    "Sports, Arts & Heritage",
+    "Food Security",
+    "Community Support"
+  ],
   "campaign": {
     "title": "Tables, Chairs & Safety Mat",
     "goal": 16500,
@@ -21,8 +32,8 @@
       { "label": "Delivery & Setup", "amount": 750 }
     ],
     "tiers": [
-      { "label": "child's chair", "unit": 350 },
-      { "label": "child's table", "unit": 1200 }
+      { "label": "child's chair", "unit": 350, "emoji": "🪑" },
+      { "label": "child's table", "unit": 1200, "emoji": "🛍️" }
     ]
   },
   "stats": [
