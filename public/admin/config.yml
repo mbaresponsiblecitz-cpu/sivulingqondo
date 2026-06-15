@@ -141,8 +141,6 @@ collections:
         label: Campaign Page
         file: src/data/pages/campaign.json
         fields:
-          - { name: posterImage, label: Event poster image (optional — shown at top), widget: image, required: false }
-          - { name: posterCaption, label: Event poster caption (optional), widget: string, required: false }
           - { name: intro, label: Appeal intro, widget: markdown }
           - { name: donateLabel, label: Donate button label, widget: string, required: false }
           - { name: fundsHeading, label: "‘What your donation funds’ heading", widget: string }
@@ -216,4 +214,18 @@ collections:
       - { name: chip, label: "Tag chip (e.g. Weekly)", widget: string, required: false }
       - { name: invoice, label: Invoice link, widget: string, required: false }
       - { name: date, label: Date, widget: datetime, type: date, required: false }
+      - { name: order, label: Order, widget: number, value_type: int, default: 0 }
+  - name: events
+    label: Events
+    folder: src/data/events
+    create: true
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Event title, widget: string }
+      - { name: date, label: "When (e.g. 18 July 2026, 11:00)", widget: string, required: false }
+      - { name: location, label: Where, widget: string, required: false }
+      - { name: image, label: Poster / photo, widget: image, required: false }
+      - { name: summary, label: Details, widget: text, required: false }
+      - { name: link, label: "More-info link (optional)", widget: string, required: false }
       - { name: order, label: Order, widget: number, value_type: int, default: 0 }

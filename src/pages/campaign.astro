@@ -13,12 +13,6 @@ const proof = (await getCollection('transparency'));
 ---
 <BaseLayout title={`${c.title} — ${site.orgName}`} description="Help 15 children learn with dignity. Goal: R16,500.">
   <section class="section"><div class="container">
-    {page.posterImage && (
-      <figure class="event-poster">
-        <img src={page.posterImage} alt={page.posterCaption || 'Campaign event poster'} loading="eager" />
-        {page.posterCaption && <figcaption>{page.posterCaption}</figcaption>}
-      </figure>
-    )}
     <h1>{c.title}</h1>
     <div class="lede prose" set:html={md(page.intro)}></div>
     <DonationThermometer raised={c.raised} goal={c.goal} />
@@ -58,9 +52,6 @@ const proof = (await getCollection('transparency'));
   </div></section>
 </BaseLayout>
 <style>
-  .event-poster { max-width: 480px; margin: 0 auto var(--space-4); }
-  .event-poster img { width: 100%; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); display: block; }
-  .event-poster figcaption { margin-top: var(--space-2); text-align: center; color: var(--ink-soft); font-size: .95rem; }
   .lede { font-size: 1.15rem; max-width: 55ch; }
   .budget { width: 100%; max-width: 520px; border-collapse: collapse; }
   .budget td { padding: .6rem 0; border-bottom: 1px solid #e3d7c6; }

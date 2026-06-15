@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+const events = (await getCollection('events')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title={`Events — ${site.orgName}`} description="Upcoming events and community days with Sivulingqondo Community Project & ECD.">
+  <section class="section"><div class="container">
+    <h1>Events</h1>
+    {events.length > 0 ? (
+      <div class="events-list">
+        {events.map((e) => (
+          <article class="event-card">
+            {e.data.image && (
+              <div class="event-card-media">
+                <img src={e.data.image} alt={e.data.title} loading="lazy" />
+              </div>
+            )}
+            <div class="event-card-body">
+              <h2>{e.data.title}</h2>
+              {e.data.date && <p class="event-meta"><strong>When:</strong> {e.data.date}</p>}
+              {e.data.location && <p class="event-meta"><strong>Where:</strong> {e.data.location}</p>}
+              {e.data.summary && <p>{e.data.summary}</p>}
+              <div class="event-actions">
+                {e.data.link && <a class="btn btn-primary" href={e.data.link} target="_blank" rel="noopener">More info</a>}
+                <a class="btn btn-secondary" href="/get-involved">Get involved</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <p>No events are scheduled right now — check back soon.</p>
+    )}
+  </div></section>
+</BaseLayout>
+<style>
+  .events-list { display: grid; gap: var(--space-4); }
+  .event-card { display: grid; grid-template-columns: minmax(0, 320px) 1fr; gap: var(--space-4); align-items: start; background: #fff; border: 1px solid #e3d7c6; border-radius: var(--radius); box-shadow: var(--shadow); padding: var(--space-3); }
+  .event-card-media img { width: 100%; height: auto; border-radius: var(--radius); display: block; }
+  .event-card-body h2 { margin-top: 0; }
+  .event-meta { margin: .2rem 0; color: var(--ink-soft); }
+  .event-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-3); }
+  @media (max-width: 720px) { .event-card { grid-template-columns: 1fr; } }
+</style>

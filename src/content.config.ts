@@ -44,4 +44,17 @@ const transparency = defineCollection({
   }),
 });
 
-export const collections = { focusAreas, team, gallery, transparency };
+const events = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/data/events' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    location: z.string().optional(),
+    image: z.string().optional(),
+    summary: z.string().optional(),
+    link: z.string().optional(),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { focusAreas, team, gallery, transparency, events };
